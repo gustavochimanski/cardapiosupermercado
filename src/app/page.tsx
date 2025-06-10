@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client"
 import { useState } from "react";
 import { CategorySection } from "@/components/categorySection";
@@ -19,6 +21,7 @@ const produtosSnacks = [
 
 export default function Home() {
   const [sheetOpen, setSheetOpen] = useState(false);
+  
   const [produtoSelecionado, setProdutoSelecionado] = useState<any>(null);
 
   function handleOpenSheet(produto: any) {
