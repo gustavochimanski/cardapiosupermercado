@@ -33,16 +33,16 @@ export function ProductCard({ name, image, price, description, onAdd }: ProductC
         )}
       </div>
 
-      <CardContent className="flex-1 flex flex-col justify-between p-0">
+      <CardContent className="flex-1 flex flex-col justify-between px-1 gap-1">
             {/* Título em 1 linha só */}
-            <div className="font-semibold text-base line-clamp-1 h-[24px] mb-1 mt-1" title={name}>
+            <div className="font-semibold text-base line-clamp-1 h-[24px] " title={name}>
             {name}
             </div>
 
             {/* Badge com descrição */}
             {description && (
                 <Badge
-                    className="w-fit mb-1 text-xs max-w-full whitespace-nowrap overflow-hidden text-ellipsis"
+                    className="w-fit text-xs max-w-full whitespace-nowrap overflow-hidden text-ellipsis"
                     title={description}
                     variant={"secondary"}
                 >
@@ -59,11 +59,11 @@ export function ProductCard({ name, image, price, description, onAdd }: ProductC
       <Button
         onClick={onAdd}
         size="icon"
-        className="rounded-xl rounded-t-none bg-primary text-white shadow-md hover:bg-primary/90 transition w-full"
+        className="rounded-xl rounded-t-none bg-accent text-white shadow-md transition w-full"
         variant="default"
         aria-label="Adicionar produto"
       >
-        <Plus size={20} />
+        <Plus className="text-primary" size={20} />
       </Button>
     </Card>
   );

@@ -12,14 +12,16 @@ const produtosBebidas = [
 const produtosSnacks = [
   { id: 3, name: "Batata Chips", image: "/coca", price: 4.99 },
   { id: 4, name: "Doritos", image: "/coca", price: 5.49 },
-  // ...
 ];
+
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col gap-4">
       <HeaderComponent />
       <main className="flex-1 p-2">
+        <CategorySection categoria="bebidas" categoriaLabel="Bebidas" produtos={produtosBebidas} />
+        <CategorySection categoria="snacks" categoriaLabel="Snacks" produtos={produtosSnacks} />
         <CategorySection categoria="bebidas" categoriaLabel="Bebidas" produtos={produtosBebidas} />
         <CategorySection categoria="snacks" categoriaLabel="Snacks" produtos={produtosSnacks} />
       </main>
