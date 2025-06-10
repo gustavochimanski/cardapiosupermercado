@@ -12,6 +12,8 @@ interface ProductCardProps {
   onAdd?: () => void;
 }
 
+
+
 export function ProductCard({ name, image, price, description, onAdd }: ProductCardProps) {
   return (
     <Card className="max-w-xs mx-auto rounded-2xl flex flex-col justify-between group transition h-full p-0 gap-2">
@@ -56,15 +58,16 @@ export function ProductCard({ name, image, price, description, onAdd }: ProductC
           </div>
       </CardContent>
       
-      <Button
-        onClick={onAdd}
-        size="icon"
-        className="rounded-xl rounded-t-none bg-accent text-white shadow-md transition w-full"
-        variant="default"
-        aria-label="Adicionar produto"
-      >
-        <Plus className="text-primary" size={20} />
-      </Button>
+    <Button
+    onClick={onAdd}
+    size="icon"
+    className="rounded-xl rounded-t-none bg-accent text-white shadow-md transition w-full"
+    variant="default"
+    aria-label="Adicionar produto"
+    >
+    <Plus className="text-primary" size={20} />
+    </Button>
+
     </Card>
   );
 }

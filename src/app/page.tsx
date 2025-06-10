@@ -1,6 +1,9 @@
+"use client"
+import { useState } from "react";
 import { CategorySection } from "@/components/categorySection";
 import FooterComponent from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
+import { SheetAdicionarProduto } from "@/components/SheetAddProduto";
 
 // Exemplo de dados
 const produtosBebidas = [
@@ -14,18 +17,47 @@ const produtosSnacks = [
   { id: 4, name: "Doritos", image: "/coca", price: 5.49 },
 ];
 
-
 export default function Home() {
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [produtoSelecionado, setProdutoSelecionado] = useState<any>(null);
+
+  function handleOpenSheet(produto: any) {
+    setProdutoSelecionado(produto);
+    setSheetOpen(true);
+  }
+
+  function handleAdd(produto: any, quantity: number) {
+    // Adicione lógica de carrinho aqui se quiser!
+    alert(`Adicionado: ${produto.name} x${quantity}`);
+    setSheetOpen(false);
+  }
+
   return (
     <div className="min-h-screen flex flex-col gap-4">
       <HeaderComponent />
       <main className="flex-1 p-2">
-        <CategorySection categoria="bebidas" categoriaLabel="Bebidas" produtos={produtosBebidas} />
-        <CategorySection categoria="snacks" categoriaLabel="Snacks" produtos={produtosSnacks} />
-        <CategorySection categoria="bebidas" categoriaLabel="Bebidas" produtos={produtosBebidas} />
-        <CategorySection categoria="snacks" categoriaLabel="Snacks" produtos={produtosSnacks} />
+        <CategorySection
+          categoria="bebidas"
+          categoriaLabel="Bebidas"
+          produtos={produtosBebidas}
+          onAdd={handleOpenSheet}
+        />
+        <CategorySection
+          categoria="snacks"
+          categoriaLabel="Snacks"
+          produtos={produtosSnacks}
+          onAdd={handleOpenSheet}
+        />
       </main>
       <FooterComponent />
+      {produtoSelecionado && (
+        <SheetAdicionarProduto
+          produto={produtoSelecionado}
+          isOpen={sheetOpen}
+          onAdd={handleAdd}
+          onClose={() => setSheetOpen(false)}
+        />
+      )}
     </div>
   );
 }
