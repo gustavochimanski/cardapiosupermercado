@@ -21,7 +21,7 @@ export function ProductCard({ name, image, price, description, onAdd }: ProductC
       <div onClick={onAdd} className="h-32 w-full relative overflow-hidden rounded-t-2xl bg-muted flex items-center justify-center">
         {image ? (
           <Image
-            src={image}
+            src={`/${image}`}
             alt={name}
             fill
             className="object-scale-down"
