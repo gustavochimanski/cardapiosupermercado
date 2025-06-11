@@ -1,6 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardAction, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { CirclePlus, Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge"; // Importa o Badge!
 import Image from "next/image";
 
@@ -18,7 +18,7 @@ export function ProductCard({ name, image, price, description, onAdd }: ProductC
   return (
     <Card className="max-w-xs mx-auto rounded-2xl flex flex-col justify-between group transition h-full p-0 gap-2">
       {/* Imagem do produto */}
-      <div className="h-32 w-full relative overflow-hidden rounded-t-2xl bg-muted flex items-center justify-center">
+      <div onClick={onAdd} className="h-32 w-full relative overflow-hidden rounded-t-2xl bg-muted flex items-center justify-center">
         {image ? (
           <Image
             src={image}
@@ -35,7 +35,7 @@ export function ProductCard({ name, image, price, description, onAdd }: ProductC
         )}
       </div>
 
-      <CardContent className="flex-1 flex flex-col justify-between px-1 gap-1">
+      <CardContent onClick={onAdd} className="flex-1 flex flex-col justify-between px-1 gap-1">
             {/* Título em 1 linha só */}
             <div className="font-semibold text-base line-clamp-1 h-[24px] " title={name}>
             {name}
@@ -58,16 +58,15 @@ export function ProductCard({ name, image, price, description, onAdd }: ProductC
           </div>
       </CardContent>
       
-    <Button
-    onClick={onAdd}
-    size="icon"
-    className="rounded-xl rounded-t-none bg-accent text-white shadow-md transition w-full"
-    variant="default"
-    aria-label="Adicionar produto"
-    >
-    <Plus className="text-primary" size={20} />
-    </Button>
-
+      <Button
+        onClick={() => window.alert("Hello")}
+        size="icon"
+        className="rounded-xl rounded-t-none bg-accent text-white shadow-md transition w-full"
+        variant="default"
+        aria-label="Adicionar produto"
+        >
+        <CirclePlus className="text-primary" size={20} />
+      </Button>
     </Card>
   );
 }

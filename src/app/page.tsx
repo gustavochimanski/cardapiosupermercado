@@ -6,6 +6,7 @@ import { CategorySection } from "@/components/categorySection";
 import FooterComponent from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
 import { SheetAdicionarProduto } from "@/components/SheetAddProduto";
+import { CategoryScrollSection } from "@/components/categoryScrollSection";
 
 // Exemplo de dados
 const produtosBebidas = [
@@ -17,6 +18,15 @@ const produtosBebidas = [
 const produtosSnacks = [
   { id: 3, name: "Batata Chips", image: "/coca", price: 4.99 },
   { id: 4, name: "Doritos", image: "/coca", price: 5.49 },
+];
+
+const categorias = [
+  { id: 1, label: "Bebidas", image: "/cat-bebidas.jpg", href: "/categoria/bebidas" },
+  { id: 2, label: "Hortifruti", image: "/cat-hortifruti.jpg", href: "/categoria/hortifruti" },
+  { id: 3, label: "Bebidas", image: "/cat-bebidas.jpg", href: "/categoria/bebidas" },
+  { id: 4, label: "Hortifruti", image: "/cat-hortifruti.jpg", href: "/categoria/hortifruti" },
+  { id: 5, label: "Bebidas", image: "/cat-bebidas.jpg", href: "/categoria/bebidas" },
+  { id: 6, label: "Hortifruti", image: "/cat-hortifruti.jpg", href: "/categoria/hortifruti" },
 ];
 
 export default function Home() {
@@ -39,6 +49,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col gap-4">
       <HeaderComponent />
       <main className="flex-1 p-2">
+        <CategoryScrollSection categorias={categorias} titulo="Categorias" />
         <CategorySection
           categoria="bebidas"
           categoriaLabel="Bebidas"
@@ -52,7 +63,6 @@ export default function Home() {
           onAdd={handleOpenSheet}
         />
       </main>
-      <FooterComponent />
       {produtoSelecionado && (
         <SheetAdicionarProduto
           produto={produtoSelecionado}

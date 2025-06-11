@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Badge } from "./ui/badge";
 
 // src/types/product.ts
 export interface Product {
@@ -93,9 +94,14 @@ export function SheetAdicionarProduto({
                   {produto.name}
                 </span>
                 {produto.description && (
-                  <span className="text-muted-foreground text-sm line-clamp-2">
+                  <Badge
+                    className="w-fit text-xs max-w-full whitespace-nowrap overflow-hidden text-ellipsis"
+                    title={produto.description}
+                    variant={"secondary"}
+                  >
+                    <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"> <path d="M6 9l6 6 6-6" /></svg>
                     {produto.description}
-                  </span>
+                </Badge>
                 )}
               </span>
             </SheetTitle>

@@ -12,7 +12,7 @@ export function SearchBarComponent() {
         aria-label="Buscar"
       />
       <Button type="submit"  className="rounded-3xl">
-        <Search size={18}/>
+        <Search  size={18}/>
         <span className="sr-only">Buscar</span>
       </Button>
     </form>
