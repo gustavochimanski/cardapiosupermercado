@@ -1,6 +1,6 @@
 // src/components/Footer/FooterComponent.tsx
 
-import { Home, Tag, List, ClipboardPen, Apple, CircleUser } from "lucide-react";
+import { Home, Tag, ClipboardPen, Apple, CircleUser } from "lucide-react";
 import Link from "next/link";
 
 const FooterComponent = () => {

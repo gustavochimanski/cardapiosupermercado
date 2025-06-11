@@ -3,7 +3,6 @@
 "use client"
 import { useState } from "react";
 import { CategorySection } from "@/components/categorySection";
-import FooterComponent from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
 import { SheetAdicionarProduto } from "@/components/SheetAddProduto";
 import { CategoryScrollSection } from "@/components/categoryScrollSection";

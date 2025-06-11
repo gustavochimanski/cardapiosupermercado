@@ -1,6 +1,6 @@
-import { Card, CardAction, CardContent } from "@/components/ui/card";
+import { Card,  CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CirclePlus, Plus } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import { Badge } from "@/components/ui/badge"; // Importa o Badge!
 import Image from "next/image";
 

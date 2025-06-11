@@ -1,7 +1,7 @@
 // src/components/Header/HeaderComponent.tsx
 
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { SearchBarComponent } from "./Search";
 import { MapPinCheck } from "lucide-react";
 
