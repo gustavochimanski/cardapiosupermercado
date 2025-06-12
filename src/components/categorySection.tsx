@@ -1,32 +1,28 @@
+import React from "react";
 import { ProductCard } from "./ProductCard";
-import { ProdutoCard } from "@/types/ProdutoCard";
+import type { ProdutoCard } from "@/types/ProdutoCard";
 
-interface CategorySectionProps {
-  categoria: string;
+interface Props {
   categoriaLabel?: string;
   produtos: ProdutoCard[];
-  onAdd?: (produto: ProdutoCard) => void;
+  onAdd?: (p: ProdutoCard) => void;
 }
 
-export function CategorySection({
-  categoriaLabel,
-  produtos,
-  onAdd,
-}: CategorySectionProps) {
-  if (!produtos || produtos.length === 0) return null; // Não renderiza se não tem produtos
-
+function CategorySection({ categoriaLabel, produtos, onAdd }: Props) {
+  if (produtos.length === 0) return null;
   return (
     <section>
-      {categoriaLabel && (
-        <h2 className="text-lg font-bold mb-3 px-2">{categoriaLabel}</h2>
-      )}
-      <div className="flex gap-4 overflow-x-auto snap-x pb-2 hide-scrollbar">
-        {produtos.map((produto) => (
-          <div key={produto.id} className="snap-start min-w-[150px] max-w-xs">
-            <ProductCard {...produto} onAdd={() => onAdd?.(produto)} />
+      {categoriaLabel && <h2 className="text-xl font-bold mb-2 px-2">{categoriaLabel}</h2>}
+      <div className="flex overflow-x-auto gap-4 pb-2 hide-scrollbar">
+        {produtos.map((p) => (
+          <div key={p.id} className="snap-start min-w-[150px]">
+            <ProductCard {...p} onAdd={() => onAdd?.(p)} />
           </div>
         ))}
       </div>
     </section>
   );
 }
+
+// Memoizamos pra só re-render quando produtos ou onAdd mudarem
+export default React.memo(CategorySection);

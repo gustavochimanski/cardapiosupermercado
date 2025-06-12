@@ -15,14 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Badge } from "./ui/badge";
-
-// src/types/product.ts
-export interface Product {
-  name: string;
-  image: string;
-  price: number;
-  description?: string;
-}
+import { ProdutoCard } from "@/types/ProdutoCard";
 
 const schema = z.object({
   quantity: z
@@ -36,8 +29,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 interface SheetAdicionarProdutoProps {
-  produto: Product;
-  onAdd?: (produto: Product, quantity: number) => void;
+  produto: ProdutoCard;
+  onAdd?: (produto: ProdutoCard, quantity: number) => void;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -73,7 +66,7 @@ export function SheetAdicionarProduto({
     onAdd?.(produto, data.quantity);
     onClose();
   }
-
+  console.log(produto.image)
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent side="bottom" className="pb-6">

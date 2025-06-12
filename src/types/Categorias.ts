@@ -1,7 +1,9 @@
 // src/types/Categoria.ts
-export interface Categoria {
-  id: string | number;
+export interface CategoriaDelivery {
+  id: number;
   label: string;
-  image: string | null;
-  href: string | null;
+  imagem: string | null;
+  slug: string
+  slug_pai: string | null
+  href: string;
 }

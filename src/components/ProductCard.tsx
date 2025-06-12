@@ -13,15 +13,15 @@ interface ProductCardProps {
 }
 
 
-
 export function ProductCard({ name, image, price, description, onAdd }: ProductCardProps) {
+  console.log(image)
   return (
     <Card className="max-w-xs mx-auto rounded-2xl flex flex-col justify-between group transition h-full p-0 gap-2">
       {/* Imagem do produto */}
       <div onClick={onAdd} className="h-32 w-full relative overflow-hidden rounded-t-2xl bg-muted flex items-center justify-center">
         {image ? (
           <Image
-            src={`/${image}`}
+            src={image}
             alt={name}
             fill
             className="object-scale-down"

@@ -5,5 +5,4 @@ export interface ProdutoCard {
   image: string;
   price: number;
   description?: string;
-  [key: string]: any; // Se quiser permitir extras, mas pode remover pra forçar estrutura rígida
 }
