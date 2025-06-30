@@ -1,3 +1,5 @@
+import { TypeCadProdDelivery } from "./Produtos";
+
 // src/types/Categoria.ts
 export interface CategoriaDelivery {
   id: number;
@@ -6,4 +8,6 @@ export interface CategoriaDelivery {
   slug: string
   slug_pai: string | null
   href: string;
+  destacar_em_slug: string
+  produtos?: TypeCadProdDelivery[]; // 👈 aqui!
 }

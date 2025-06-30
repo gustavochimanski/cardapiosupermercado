@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Badge } from "./ui/badge";
-import { ProdutoCard } from "@/types/ProdutoCard";
+import { TypeCadProdDelivery } from "@/types/Produtos";
 
 const schema = z.object({
   quantity: z
@@ -29,8 +29,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 interface SheetAdicionarProdutoProps {
-  produto: ProdutoCard;
-  onAdd?: (produto: ProdutoCard, quantity: number) => void;
+  produto: TypeCadProdDelivery;
+  onAdd?: (produto: TypeCadProdDelivery, quantity: number) => void;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -66,7 +66,6 @@ export function SheetAdicionarProduto({
     onAdd?.(produto, data.quantity);
     onClose();
   }
-  console.log(produto.image)
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent side="bottom" className="pb-6">
@@ -75,8 +74,8 @@ export function SheetAdicionarProduto({
             <SheetTitle className="flex gap-4 items-center">
               <div className="relative w-20 h-20 shrink-0">
                 <Image
-                  src={produto.image ?? "/placeholder.png"}
-                  alt={produto.name}
+                  src={produto.imagem || "/placeholder.jpg"}
+                  alt={produto.descricao || "Sem Nome"}
                   fill
                   priority
                   className="object-contain rounded-md"
@@ -84,16 +83,16 @@ export function SheetAdicionarProduto({
               </div>
               <span className="flex flex-col max-w-[60%]">
                 <span className="font-semibold leading-tight">
-                  {produto.name}
+                  {produto.descricao}
                 </span>
-                {produto.description && (
+                {produto.descricao && (
                   <Badge
                     className="w-fit text-xs max-w-full whitespace-nowrap overflow-hidden text-ellipsis"
-                    title={produto.description}
+                    title={produto.descricao}
                     variant={"secondary"}
                   >
                     <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"> <path d="M6 9l6 6 6-6" /></svg>
-                    {produto.description}
+                    {produto.descricao}
                 </Badge>
                 )}
               </span>
@@ -127,7 +126,7 @@ export function SheetAdicionarProduto({
 
           <SheetFooter>
             <Button type="submit" className="w-full bg-primary text-background">
-              Adicionar R$ {(produto.price * quantity).toFixed(2)}
+              Adicionar R$ {(produto.preco_venda * quantity).toFixed(2)}
             </Button>
           </SheetFooter>
         </form>

@@ -5,6 +5,6 @@ import { CategoriaDelivery } from "@/types/Categorias";
 
 
 export async function fetchCategoriasDelivery(): Promise<CategoriaDelivery[]> {
-  const { data } = await api.get("/categorias/delivery", {});
+  const { data } = await api.get("/mensura/cardapio/categorias/", {});
   return data;
 }

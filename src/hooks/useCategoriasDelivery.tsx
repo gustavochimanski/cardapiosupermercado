@@ -1,6 +1,7 @@
 // src/hooks/useCategoriasDelivery.ts
 
-import { CategoriaDelivery, fetchCategoriasDelivery } from "@/services/categoriasDeliveryService";
+import {  fetchCategoriasDelivery } from "@/services/categoriasDeliveryService";
+import { CategoriaDelivery } from "@/types/Categorias";
 import { useQuery } from "@tanstack/react-query";
 
 export function useCategoriasDelivery() {
