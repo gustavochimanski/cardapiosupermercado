@@ -21,7 +21,7 @@ export default function CategoryScrollSection({ categorias, titulo }: Props) {
         {categorias.map((cat) => (
           <div key={cat.id} className="min-w-[140px]">
             <CategoryCard
-              label={cat.label}
+              label={cat.descricao}
               image={cat.imagem}
               href={cat.slug_pai ? `/categoria/${cat.slug_pai}/${cat.slug}` : `/categoria/${cat.slug}`}
             />

@@ -1,10 +1,4 @@
 
-
-export type CategoriaMini = {
-  slug: string;
-  slug_pai?: string | null;
-};
-
 // Representa o relacionamento produtos_empresa
 export type TypeProdutoEmp = {
   empresa: number;
@@ -26,7 +20,6 @@ export type TypeCadProdDelivery = {
   preco_venda: number;
   custo?: number;
   cod_categoria?: number;
-  categoria?: CategoriaMini; // <- esta linha é a correção!
   produtos_empresa?: TypeProdutoEmp[]; // caso precise mais pra frente
 };
 
