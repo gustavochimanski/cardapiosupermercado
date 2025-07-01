@@ -9,7 +9,6 @@ import CategorySection from "@/components/categorySection";
 import { SheetAdicionarProduto } from "@/components/SheetAddProduto";
 
 import { useCategoriasComProdutos } from "@/hooks/useCategoriasComProdutos";
-import type { CategoriaDelivery } from "@/types/Categorias";
 import type { TypeCadProdDelivery } from "@/types/Produtos";
 
 export default function CategoriaPage() {

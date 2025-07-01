@@ -21,6 +21,7 @@ export default function HomePage() {
 
   function handleAdd(produto: TypeCadProdDelivery, quantity: number) {
     alert(`Adicionado: ${produto.descricao} x${quantity}`);
+    handleOpenSheet(produto)
     setSheetOpen(false);
   }
 
