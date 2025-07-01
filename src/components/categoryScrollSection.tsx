@@ -7,10 +7,9 @@ import type { CategoriaComProdutos } from "@/types/Categorias";
 interface Props {
   categorias: CategoriaComProdutos[];
   titulo?: string;
-  onCategoriaClick?: (categoria: CategoriaComProdutos) => void;
 }
 
-export default function CategoryScrollSection({ categorias, titulo, onCategoriaClick }: Props) {
+export default function CategoryScrollSection({ categorias, titulo }: Props) {
   if (categorias.length === 0) return null;
 
   return (
@@ -24,7 +23,6 @@ export default function CategoryScrollSection({ categorias, titulo, onCategoriaC
               label={`${cat.descricao} (${cat.produtos.length})`}
               image={cat.imagem}
               href={cat.slug_pai ? `/categoria/${cat.slug_pai}/${cat.slug}` : `/categoria/${cat.slug}`}
-              onClick={() => onCategoriaClick?.(cat)}
             />
           </div>
         ))}

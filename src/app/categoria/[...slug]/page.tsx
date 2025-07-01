@@ -10,7 +10,6 @@ import { SheetAdicionarProduto } from "@/components/SheetAddProduto";
 
 import { useCategoriasDelivery } from "@/hooks/useCategoriasDelivery";
 import type { ProdutoEmpMini } from "@/types/Produtos";
-import type { CategoriaComProdutos } from "@/types/Categorias";
 
 export default function CategoriaPage() {
   const [sheetOpen, setSheetOpen] = useState(false);
