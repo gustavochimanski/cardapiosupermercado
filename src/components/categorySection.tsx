@@ -1,11 +1,11 @@
 import React from "react";
 import { ProductCard } from "./ProductCard";
-import { TypeCadProdDelivery } from "@/types/Produtos";
+import { ProdutoEmpMini } from "@/types/Produtos"; // ✅ Novo tipo correto
 
 interface Props {
   categoriaLabel?: string;
-  produtos: TypeCadProdDelivery[];
-  onAdd?: (p: TypeCadProdDelivery) => void;
+  produtos: ProdutoEmpMini[];
+  onAdd?: (p: ProdutoEmpMini) => void;
 }
 
 function CategorySection({ categoriaLabel, produtos, onAdd }: Props) {

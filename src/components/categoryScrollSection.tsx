@@ -2,15 +2,15 @@
 
 import React from "react";
 import { CategoryCard } from "./CategoryCard";
-import type { CategoriaDelivery } from "@/types/Categorias";
+import type { CategoriaComProdutos } from "@/types/Categorias";
 
-/* Componente principal */
 interface Props {
-  categorias: CategoriaDelivery[];
+  categorias: CategoriaComProdutos[];
   titulo?: string;
+  onCategoriaClick?: (categoria: CategoriaComProdutos) => void;
 }
 
-export default function CategoryScrollSection({ categorias, titulo }: Props) {
+export default function CategoryScrollSection({ categorias, titulo, onCategoriaClick }: Props) {
   if (categorias.length === 0) return null;
 
   return (
@@ -21,9 +21,10 @@ export default function CategoryScrollSection({ categorias, titulo }: Props) {
         {categorias.map((cat) => (
           <div key={cat.id} className="min-w-[140px]">
             <CategoryCard
-              label={cat.descricao}
+              label={`${cat.descricao} (${cat.produtos.length})`}
               image={cat.imagem}
               href={cat.slug_pai ? `/categoria/${cat.slug_pai}/${cat.slug}` : `/categoria/${cat.slug}`}
+              onClick={() => onCategoriaClick?.(cat)}
             />
           </div>
         ))}

@@ -1,13 +1,12 @@
 // src/hooks/useCategoriasDelivery.ts
-
-import {  fetchCategoriasDelivery } from "@/services/categoriasDeliveryService";
-import { CategoriaDelivery } from "@/types/Categorias";
+import { fetchCategoriasDelivery } from "@/services/categoriasDeliveryService";
+import { CategoriaComProdutos } from "@/types/Categorias";
 import { useQuery } from "@tanstack/react-query";
 
-export function useCategoriasDelivery() {
-  return useQuery<CategoriaDelivery[], Error>({
-    queryKey: ["categorias-delivery"],
-    queryFn: () => fetchCategoriasDelivery(),
+export function useCategoriasDelivery(empresaId: number) {
+  return useQuery<CategoriaComProdutos[], Error>({
+    queryKey: ["categorias-delivery", empresaId],
+    queryFn: () => fetchCategoriasDelivery(empresaId),
     staleTime: 1000 * 60,
   });
 }

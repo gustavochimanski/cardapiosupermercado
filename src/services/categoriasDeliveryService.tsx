@@ -1,10 +1,12 @@
 // src/services/categoriaDeliveryService.ts
 
 import { api } from "@/app/api/api";
-import { CategoriaDelivery } from "@/types/Categorias";
+import { CategoriaComProdutos } from "@/types/Categorias";
 
 
-export async function fetchCategoriasDelivery(): Promise<CategoriaDelivery[]> {
-  const { data } = await api.get("/mensura/cardapio/categorias/", {});
+export async function fetchCategoriasDelivery(empresaId: number): Promise<CategoriaComProdutos[]> {
+  const { data } = await api.get("/mensura/cardapio/produtos/", {
+    params: { empresaId }
+  });
   return data;
 }

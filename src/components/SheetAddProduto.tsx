@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Badge } from "./ui/badge";
-import { TypeCadProdDelivery } from "@/types/Produtos";
+import type { ProdutoEmpMini } from "@/types/Produtos"; // ✅ tipo correto
 
 const schema = z.object({
   quantity: z
@@ -29,8 +29,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 interface SheetAdicionarProdutoProps {
-  produto: TypeCadProdDelivery;
-  onAdd?: (produto: TypeCadProdDelivery, quantity: number) => void;
+  produto: ProdutoEmpMini;
+  onAdd?: (produto: ProdutoEmpMini, quantity: number) => void;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -66,6 +66,12 @@ export function SheetAdicionarProduto({
     onAdd?.(produto, data.quantity);
     onClose();
   }
+
+  const imagem = produto.produto.imagem || "/placeholder.jpg";
+  const descricao = produto.produto.descricao || "Sem nome";
+
+  console.log("aaadasdasdasdas", imagem)
+
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent side="bottom" className="pb-6">
@@ -74,27 +80,22 @@ export function SheetAdicionarProduto({
             <SheetTitle className="flex gap-4 items-center">
               <div className="relative w-20 h-20 shrink-0">
                 <Image
-                  src={produto.imagem || "/placeholder.jpg"}
-                  alt={produto.descricao || "Sem Nome"}
+                  src={imagem}
+                  alt={descricao}
                   fill
                   priority
                   className="object-contain rounded-md"
                 />
               </div>
               <span className="flex flex-col max-w-[60%]">
-                <span className="font-semibold leading-tight">
-                  {produto.descricao}
-                </span>
-                {produto.descricao && (
-                  <Badge
-                    className="w-fit text-xs max-w-full whitespace-nowrap overflow-hidden text-ellipsis"
-                    title={produto.descricao}
-                    variant={"secondary"}
-                  >
-                    <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"> <path d="M6 9l6 6 6-6" /></svg>
-                    {produto.descricao}
+                <span className="font-semibold leading-tight">{descricao}</span>
+                <Badge
+                  className="w-fit text-xs max-w-full whitespace-nowrap overflow-hidden text-ellipsis"
+                  title={descricao}
+                  variant={"secondary"}
+                >
+                  {descricao}
                 </Badge>
-                )}
               </span>
             </SheetTitle>
           </SheetHeader>
