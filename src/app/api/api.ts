@@ -3,7 +3,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://69.62.93.161:1000", // se mudar para produção, troca aqui
+  baseURL: "/api/mensura", // se mudar para produção, troca aqui
   headers: {
     "Content-Type": "application/json",
   },
