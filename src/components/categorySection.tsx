@@ -18,7 +18,7 @@ function CategorySection({ categoriaLabel, produtos, onAdd }: Props) {
       )}
       <div className="flex overflow-x-auto gap-4 pb-2 hide-scrollbar">
         {produtos.map((p) => (
-          <div key={p.id} className="snap-start min-w-[150px]">
+          <div key={p.cod_barras} className="snap-start min-w-[150px]">
             <ProductCard produto={p} onAdd={() => onAdd?.(p)} />
           </div>
         ))}

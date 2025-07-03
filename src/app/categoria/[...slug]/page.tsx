@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import HeaderComponent from "@/components/Header";
 import CategoryScrollSection from "@/components/categoryScrollSection";
@@ -10,29 +10,56 @@ import { SheetAdicionarProduto } from "@/components/SheetAddProduto";
 
 import { useCategoriasDelivery } from "@/hooks/useCategoriasDelivery";
 import type { ProdutoEmpMini } from "@/types/Produtos";
+import { Button } from "@/components/ui/button";
 
 export default function CategoriaPage() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState<ProdutoEmpMini | null>(null);
+  const router = useRouter()
 
-  const empresaId = 1; // 🔁 Troque isso para vir de login, context ou URL
-
-  // Pega o slug da URL (ex: [...slug])
+  const empresaId = 1;
   const params = useParams<{ slug?: string | string[] }>();
   const slugAtual = Array.isArray(params.slug)
     ? params.slug[params.slug.length - 1]
     : params.slug ?? "";
 
-  // Pega categorias + produtos da API
   const { data: categorias = [], isLoading } = useCategoriasDelivery(empresaId);
 
-  // Identifica a categoria atual pelo slug
   const categoriaAtual = categorias.find((cat) => cat.slug === slugAtual);
-
-  // Filtra as subcategorias da categoria atual
   const subcategorias = categorias.filter((cat) => cat.slug_pai === slugAtual);
+  const vitrines = categoriaAtual?.vitrines ?? [];
 
-  // Carregamento
+  const produtosDeTodasCategorias = categorias.flatMap((cat) => cat.produtos);
+
+  const blocosVitrine = vitrines.map((vitrine) => {
+    const produtosFiltrados = produtosDeTodasCategorias.filter((produto) => {
+      const mesmaCategoria = produto.produto.cod_categoria === vitrine.cod_categoria;
+      const mesmaSubcategoria = produto.subcategoria_id === vitrine.id;
+      return mesmaCategoria && mesmaSubcategoria;
+    });
+    
+    if (produtosFiltrados.length === 0) return null;
+
+    return (
+      <CategorySection
+        key={vitrine.id}
+        categoriaLabel={vitrine.titulo}
+        produtos={produtosFiltrados}
+        onAdd={handleOpenSheet}
+      />
+    );
+  }).filter(Boolean);
+
+  function handleOpenSheet(produto: ProdutoEmpMini) {
+    setProdutoSelecionado(produto);
+    setSheetOpen(true);
+  }
+
+  function handleAdd(produto: ProdutoEmpMini, quantity: number) {
+    alert(`Adicionado: ${produto.produto.descricao} x${quantity}`);
+    setSheetOpen(false);
+  }
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -41,24 +68,13 @@ export default function CategoriaPage() {
     );
   }
 
-  // Abre o sheet ao clicar em produto
-  const handleOpenSheet = (produto: ProdutoEmpMini) => {
-    setProdutoSelecionado(produto);
-    setSheetOpen(true);
-  };
-
-  // Lógica mock de adicionar
-  const handleAdd = (produto: ProdutoEmpMini, quantity: number) => {
-    alert(`Adicionado: ${produto.produto.descricao} x${quantity}`);
-    setSheetOpen(false);
-  };
-
   return (
     <div className="min-h-screen flex flex-col gap-4">
       <HeaderComponent />
 
+      <Button onClick={router.back} variant={"link"}>Voltar</Button>
       <main className="flex-1 p-2">
-        {/* Subcategorias da categoria atual */}
+
         {subcategorias.length > 0 && (
           <CategoryScrollSection
             categorias={subcategorias}
@@ -66,17 +82,11 @@ export default function CategoriaPage() {
           />
         )}
 
-        {/* Produtos da categoria atual */}
-        {categoriaAtual?.produtos && categoriaAtual.produtos.length > 0 && (
-          <CategorySection
-            categoriaLabel={categoriaAtual.descricao}
-            produtos={categoriaAtual.produtos}
-            onAdd={handleOpenSheet}
-          />
-        )}
+        {blocosVitrine}
+
+
       </main>
 
-      {/* Sheet lateral */}
       {produtoSelecionado && (
         <SheetAdicionarProduto
           produto={produtoSelecionado}
