@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/mensura/:path*", // proxy para imagens, dados etc
-        destination: "http://69.62.93.161:1000/:path*",
+        destination: "https://mensuraapi.com.br/:path*",
       },
     ];
   },
