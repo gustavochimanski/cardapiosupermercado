@@ -26,7 +26,7 @@ export function CategoryCard({ label, image, href }: CategoryCardProps) {
       <div className="rounded-2xl overflow-hidden bg-muted shadow hover:shadow-lg transition p-3 flex flex-col items-center w-full">
         <div className="relative w-20 h-20 mb-2 rounded-full overflow-hidden bg-background flex items-center justify-center">
           <Image
-            loader={apiLoader}      // 👈 loader resolve o host
+            loader={apiLoader}      
             src={src}
             alt={label}
             fill
