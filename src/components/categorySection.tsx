@@ -20,11 +20,11 @@ export default React.memo(function CategorySection({
       {categoriaLabel && (
         <h2 className="text-xl font-bold mb-2 px-2">{categoriaLabel}</h2>
       )}
-      <div className="flex overflow-x-auto items-stretch gap-1 pb-2 hide-scrollbar px-2">
+      <div className="flex overflow-x-auto items-stretch gap-2 pb-2 hide-scrollbar px-2">
         {produtos.map((p) => (
           <div
             key={p.cod_barras}
-            className="snap-start min-w-[150px] flex flex-col h-full"
+            className="snap-start flex flex-col h-full"
           >
             <ProductCard produto={p} onAdd={() => onAdd?.(p)} />
           </div>
