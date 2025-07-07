@@ -1,6 +1,6 @@
 import React from "react";
 import { ProductCard } from "./ProductCard";
-import { ProdutoEmpMini } from "@/types/Produtos"; // ✅ Novo tipo correto
+import { ProdutoEmpMini } from "@/types/Produtos";
 
 interface Props {
   categoriaLabel?: string;
@@ -8,23 +8,28 @@ interface Props {
   onAdd?: (p: ProdutoEmpMini) => void;
 }
 
-function CategorySection({ categoriaLabel, produtos, onAdd }: Props) {
+export default React.memo(function CategorySection({
+  categoriaLabel,
+  produtos,
+  onAdd,
+}: Props) {
   if (produtos.length === 0) return null;
 
   return (
-    <section>
+    <section className="mb-6">
       {categoriaLabel && (
-        <h2 className="text-xl font-bold mb-2 px-2">{categoriaLabel}</h2> 
+        <h2 className="text-xl font-bold mb-2 px-2">{categoriaLabel}</h2>
       )}
-      <div className="flex overflow-x-auto gap-4 pb-2 hide-scrollbar">
+      <div className="flex overflow-x-auto items-stretch gap-1 pb-2 hide-scrollbar px-2">
         {produtos.map((p) => (
-          <div key={p.cod_barras} className="snap-start min-w-[150px]">
+          <div
+            key={p.cod_barras}
+            className="snap-start min-w-[150px] flex flex-col h-full"
+          >
             <ProductCard produto={p} onAdd={() => onAdd?.(p)} />
           </div>
         ))}
       </div>
     </section>
   );
-}
-
-export default React.memo(CategorySection);
+});
