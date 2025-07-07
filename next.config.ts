@@ -1,17 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    images: {
-    domains: ['69.62.93.161'], // ← libera esse IP para uso no <Image />
-  },
-    async rewrites() {
-    return [
+  images: {
+    domains: ["mensuraapi.com.br"],
+    remotePatterns: [
       {
-        source: "/api/mensura/:path*", // proxy para imagens, dados etc
-        destination: "https://mensuraapi.com.br/:path*",
+        protocol: "http",
+        hostname: "mensuraapi.com.br",
+        port: "1001",
+        pathname: "/**",
       },
-    ];
-  },
+    ],
+  }
 };
 
 export default nextConfig;
