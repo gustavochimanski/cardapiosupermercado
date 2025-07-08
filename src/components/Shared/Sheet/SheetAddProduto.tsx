@@ -14,8 +14,8 @@ import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Badge } from "./ui/badge";
 import type { ProdutoEmpMini } from "@/types/Produtos"; // ✅ tipo correto
+import { Badge } from "@/components/ui/badge";
 
 const schema = z.object({
   quantity: z

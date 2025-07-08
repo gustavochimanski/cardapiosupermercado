@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import HeaderComponent from "@/components/Header";
-import CategoryScrollSection from "@/components/categoryScrollSection";
-import { SheetAdicionarProduto } from "@/components/SheetAddProduto";
 
 import { useCategoriasDelivery } from "@/hooks/useCategoriasDelivery";
 import { ProdutoEmpMini } from "@/types/Produtos";
+import CategoryScrollSection from "@/components/Shared/Category/categoryScrollSection";
+import HeaderComponent from "@/components/Shared/Header";
+import { SheetAdicionarProduto } from "@/components/Shared/Sheet/SheetAddProduto";
 
 export default function HomePage() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState<ProdutoEmpMini | null>(null);
+  
 
   const empresaId = 1;
   const { data: categorias = [] } = useCategoriasDelivery(empresaId);

@@ -1,6 +1,6 @@
 import React from "react";
-import { ProductCard } from "./ProductCard";
 import { ProdutoEmpMini } from "@/types/Produtos";
+import { ProductCard } from "../ProductCard";
 
 interface Props {
   categoriaLabel?: string;

@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     domains: ["mensuraapi.com.br"],
     remotePatterns: [
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "mensuraapi.com.br",
         port: "1001",
         pathname: "/**",

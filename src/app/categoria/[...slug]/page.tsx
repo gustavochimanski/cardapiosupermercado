@@ -3,18 +3,22 @@
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-import HeaderComponent from "@/components/Header";
-import CategoryScrollSection from "@/components/categoryScrollSection";
-import CategorySection from "@/components/categorySection";
-import { SheetAdicionarProduto } from "@/components/SheetAddProduto";
-
 import { useCategoriasDelivery } from "@/hooks/useCategoriasDelivery";
 import type { ProdutoEmpMini } from "@/types/Produtos";
 import { Button } from "@/components/ui/button";
+import CategorySection from "@/components/Shared/Category/categorySection";
+import HeaderComponent from "@/components/Shared/Header";
+import CategoryScrollSection from "@/components/Shared/Category/categoryScrollSection";
+import { SheetAdicionarProduto } from "@/components/Shared/Sheet/SheetAddProduto";
+import { useAuthStatus } from "@/hooks/useAuthStatus";
 
 export default function CategoriaPage() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState<ProdutoEmpMini | null>(null);
+
+  const { isAdmin, user } = useAuthStatus();
+
+
   const router = useRouter()
 
   const empresaId = 1;
@@ -83,7 +87,8 @@ export default function CategoriaPage() {
         )}
 
         {blocosVitrine}
-
+      
+      {isAdmin && <Button className="">Botão de Admin</Button>}
 
       </main>
 
