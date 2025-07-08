@@ -21,6 +21,7 @@ interface CategoryCardProps {
 export function CategoryCard({ label, image, href }: CategoryCardProps) {
   const src = image ?? "/placeholder-categoria.jpg";
 
+  console.log("AAAA",image)
   return (
     <Link href={href} className="block group">
       <div className="rounded-2xl overflow-hidden bg-muted shadow hover:shadow-lg transition p-3 flex flex-col items-center w-full">
