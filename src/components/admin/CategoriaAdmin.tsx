@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 const AdminCategoryControls = () => {
 
-  const { isLoading, isAdmin} = useAuthStatus();
+  const { isAdmin} = useAuthStatus();
 
 
     return(

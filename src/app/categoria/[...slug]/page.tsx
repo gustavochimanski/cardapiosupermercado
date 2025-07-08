@@ -16,7 +16,7 @@ export default function CategoriaPage() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState<ProdutoEmpMini | null>(null);
 
-  const { isAdmin, user } = useAuthStatus();
+  const { isAdmin } = useAuthStatus();
 
 
   const router = useRouter()
