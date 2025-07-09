@@ -27,6 +27,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       Cookies.set("token", token, { path: "/" }); // opcional: { secure: true, sameSite: "Lax" }
     }
   }, [token]);
+  console.log("🔐 Token recebido pela URL:", token);
 
   const { data: user, isLoading } = useUser();
 
