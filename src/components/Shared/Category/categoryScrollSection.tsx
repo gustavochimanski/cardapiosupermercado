@@ -3,7 +3,8 @@
 import React from "react";
 import type { CategoriaComProdutos } from "@/types/Categorias";
 import { CategoryCard } from "./CategoryCard";
-import AdminCategoryControls from "@/components/admin/CategoriaAdmin";
+import AdminCategoryControls from "@/components/admin/controlls/CategoriaControlls";
+import CardAddCategoria from "@/components/admin/card/CardAddCategoria";
 
 interface Props {
   categorias: CategoriaComProdutos[];
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export default function CategoryScrollSection({ categorias, titulo }: Props) {
+
+  
 
   return (
     <section className="mb-4">
@@ -21,9 +24,9 @@ export default function CategoryScrollSection({ categorias, titulo }: Props) {
 
       <div className="flex overflow-x-auto gap-4 pb-2 hide-scrollbar px-2">
         {categorias.map((cat) => (
-          <div key={cat.id} className="min-w-[140px]">
+          <div key={cat.id} className="">
             <CategoryCard
-              label={`${cat.descricao} (${cat.produtos.length})`}
+              label={cat.descricao}
               image={cat.imagem}
               href={
                 cat.slug_pai
@@ -33,6 +36,8 @@ export default function CategoryScrollSection({ categorias, titulo }: Props) {
             />
           </div>
         ))}
+        <CardAddCategoria/>
+
       </div>
     </section>
   );

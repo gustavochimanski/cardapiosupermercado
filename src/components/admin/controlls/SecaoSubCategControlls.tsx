@@ -1,11 +1,11 @@
 import { useAuthStatus } from "@/hooks/useAuthStatus";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 import { Pencil, Plus, Settings } from "lucide-react";
-import { Button } from "../ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Button } from "../../ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../../ui/dropdown-menu";
 
 
-const AdminCategoryControls = () => {
+const AdminSecaoSubCategControlls = () => {
 
   const { isAdmin} = useAuthStatus();
 
@@ -66,4 +66,4 @@ const AdminCategoryControls = () => {
 }
 
 
-export default AdminCategoryControls
+export default AdminSecaoSubCategControlls

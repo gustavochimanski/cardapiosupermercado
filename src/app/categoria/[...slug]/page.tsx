@@ -10,14 +10,12 @@ import CategorySection from "@/components/Shared/Category/categorySection";
 import HeaderComponent from "@/components/Shared/Header";
 import CategoryScrollSection from "@/components/Shared/Category/categoryScrollSection";
 import { SheetAdicionarProduto } from "@/components/Shared/Sheet/SheetAddProduto";
-import { useAuthStatus } from "@/hooks/useAuthStatus";
+import { CircleArrowLeft } from "lucide-react";
+import CardAddSecaoSubCateg from "@/components/admin/card/CardAddSecaoSubCateg";
 
 export default function CategoriaPage() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState<ProdutoEmpMini | null>(null);
-
-  const { isAdmin } = useAuthStatus();
-
 
   const router = useRouter()
 
@@ -42,15 +40,13 @@ export default function CategoriaPage() {
       return mesmaCategoria && mesmaSubcategoria;
     });
     
-    if (produtosFiltrados.length === 0) return null;
-
     return (
       <CategorySection
         key={vitrine.id}
         categoriaLabel={vitrine.titulo}
         produtos={produtosFiltrados}
         onAdd={handleOpenSheet}
-      />
+        />
     );
   }).filter(Boolean);
 
@@ -76,20 +72,19 @@ export default function CategoriaPage() {
     <div className="min-h-screen flex flex-col gap-4">
       <HeaderComponent />
 
-      <Button onClick={router.back} variant={"link"}>Voltar</Button>
+      <Button onClick={router.back} variant={"link"} className="mr-auto"> <CircleArrowLeft/>Voltar</Button>
       <main className="flex-1 p-2">
-
-        {subcategorias.length > 0 && (
+        {categoriaAtual && (
           <CategoryScrollSection
             categorias={subcategorias}
-            titulo={`Subcategorias de ${categoriaAtual?.descricao ?? ""}`}
+            titulo={categoriaAtual.descricao}
           />
         )}
 
-        {blocosVitrine}
-      
-      {isAdmin && <Button className="">Botão de Admin</Button>}
 
+        {blocosVitrine}
+        <CardAddSecaoSubCateg/>
+        
       </main>
 
       {produtoSelecionado && (
