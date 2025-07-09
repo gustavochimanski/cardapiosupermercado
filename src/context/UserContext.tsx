@@ -1,5 +1,8 @@
-// context/UserContext.tsx
 "use client";
+
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import Cookies from "js-cookie";
 
 import { User, useUser } from "@/hooks/useUser";
 import { createContext, useContext, ReactNode } from "react";
@@ -9,10 +12,24 @@ type UserContextData = {
   isLoading: boolean;
 };
 
-const UserContext = createContext<UserContextData>({ user: undefined, isLoading: true });
+const UserContext = createContext<UserContextData>({
+  user: undefined,
+  isLoading: true,
+});
 
 export function UserProvider({ children }: { children: ReactNode }) {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("supervisor_token");
+
+  // Salva o token se vier pela URL
+  useEffect(() => {
+    if (token) {
+      Cookies.set("token", token, { path: "/" }); // opcional: { secure: true, sameSite: "Lax" }
+    }
+  }, [token]);
+
   const { data: user, isLoading } = useUser();
+
   return (
     <UserContext.Provider value={{ user, isLoading }}>
       {children}
