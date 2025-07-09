@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState, createContext, useContext, ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
-import Cookies from "js-cookie";
+import { createContext, useContext, ReactNode } from "react";
 import { User, useUser } from "@/hooks/useUser";
 
 type UserContextData = {
@@ -16,23 +14,10 @@ const UserContext = createContext<UserContextData>({
 });
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  const searchParams = useSearchParams();
-  const [shouldFetch, setShouldFetch] = useState(false);
-
-  useEffect(() => {
-    const token = searchParams.get("supervisor_token");
-    if (token) {
-      console.log("🔐 Token recebido pela URL:", token);
-      Cookies.set("token", token, { path: "/" });
-    }
-    setShouldFetch(true);
-  }, [searchParams]);
-
   const { data: user, isLoading } = useUser();
-  const value = shouldFetch ? { user, isLoading } : { user: undefined, isLoading: true };
 
   return (
-    <UserContext.Provider value={value}>
+    <UserContext.Provider value={{ user, isLoading }}>
       {children}
     </UserContext.Provider>
   );
