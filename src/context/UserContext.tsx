@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, ReactNode } from "react";
 import Cookies from "js-cookie";
-import { User } from "@/hooks/useUser";
+import { User, useUser } from "@/hooks/useUser";
 
 type UserContextData = {
   user?: User;
@@ -18,7 +18,7 @@ const UserContext = createContext<UserContextData>({
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
-  const [tokenHandled, setTokenHandled] = useState(false);
+  const [shouldFetch, setShouldFetch] = useState(false);
 
   useEffect(() => {
     const token = searchParams.get("supervisor_token");
@@ -26,16 +26,14 @@ export function UserProvider({ children }: { children: ReactNode }) {
       console.log("🔐 Token recebido pela URL:", token);
       Cookies.set("token", token, { path: "/" });
     }
-    setTokenHandled(true);
+    setShouldFetch(true);
   }, [searchParams]);
 
-  // ⚠️ Só chama o hook `useUser()` depois que token foi processado
-  const { data: user, isLoading } = tokenHandled
-    ? require("@/hooks/useUser").useUser()
-    : { data: undefined, isLoading: true };
+  const { data: user, isLoading } = useUser();
+  const value = shouldFetch ? { user, isLoading } : { user: undefined, isLoading: true };
 
   return (
-    <UserContext.Provider value={{ user, isLoading }}>
+    <UserContext.Provider value={value}>
       {children}
     </UserContext.Provider>
   );
