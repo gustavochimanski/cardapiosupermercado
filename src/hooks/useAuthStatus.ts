@@ -5,7 +5,7 @@ export function useAuthStatus() {
   const { user, isLoading } = useUserContext();
 
   const isAdmin = user?.role === "admin";
-  const isUser = user?.role === "user"; 
+  const isUser = user?.role === "user";
   const isGuest = !user;
 
   return {
