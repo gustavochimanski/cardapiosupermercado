@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, ReactNode } from "react";
 import Cookies from "js-cookie";
 import { User, useUser } from "@/hooks/useUser";
 
