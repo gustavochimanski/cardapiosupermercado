@@ -12,7 +12,7 @@ export function TokenHandler() {
     const token = searchParams.get("supervisor_token");
     console.log("🔐 Token recebido via URL:", token);
     if (token) {
-      setCookie("token", token, { path: "/" });
+      setCookie("supervisor_token", token, { path: "/" });
     }
   }, [searchParams]);
 

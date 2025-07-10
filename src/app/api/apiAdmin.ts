@@ -10,7 +10,7 @@ const apiAdmin = axios.create({
 
 apiAdmin.interceptors.request.use((config) => {
   // pega o token do cookie (funciona no client)
-  const token = getCookie("access_token");
+  const token = getCookie("supervisor_token");
   if (token && typeof token === "string") {
     config.headers.Authorization = `Bearer ${token}`;
   }

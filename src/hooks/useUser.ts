@@ -1,4 +1,4 @@
-import { api } from "@/app/api/api";
+import apiAdmin from "@/app/api/apiAdmin";
 import { useQuery } from "@tanstack/react-query";
 
 export interface User {
@@ -9,7 +9,7 @@ export interface User {
 export function useUser() {
   return useQuery({
     queryKey: ["currentUser"],
-    queryFn: () => api.get<{ id: string; role: string }>("/mensura/auth/me"),
+    queryFn: () => apiAdmin.get<{ id: string; role: string }>("/mensura/auth/me"),
     select: res => res.data,
     refetchOnWindowFocus: false,
   });
