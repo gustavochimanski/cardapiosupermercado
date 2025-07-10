@@ -5,7 +5,7 @@ export async function GET() {
   // só roda o mock em dev
   if (process.env.NODE_ENV !== "development") {
     return NextResponse.json(
-      { message: "Not Found" },
+      { message: "Not Founddd" },
       { status: 404 }
     );
   }
