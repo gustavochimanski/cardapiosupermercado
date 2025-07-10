@@ -9,7 +9,7 @@ export interface User {
 export function useUser() {
   return useQuery({
     queryKey: ["currentUser"],
-    queryFn: () => apiAdmin.get<{ id: string; role: string }>("mensura/auth/me"),
+    queryFn: () => apiAdmin.get<{ id: string; role: string }>("/auth/me"),
     select: res => res.data,
     refetchOnWindowFocus: false,
   });
