@@ -1,4 +1,5 @@
 // app/menu/page.tsx
+"use client"
 import { Suspense } from "react";
 import { TokenHandler } from "@/components/auth/TokenHandler";
 

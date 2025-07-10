@@ -26,6 +26,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col gap-4">
+      
       <HeaderComponent />
       <main className="flex-1 p-2">
         <CategoryScrollSection

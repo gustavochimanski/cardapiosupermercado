@@ -4,7 +4,8 @@ import "./globals.css";
 import FooterComponent from "@/components/Shared/Footer";
 import { ReactQueryProvider } from "@/providers/ReactQueryClientProvider";
 import { UserProvider } from "@/context/UserContext";
-import { TokenHandler } from "@/components/auth/TokenHandler";
+import ClientTokenHandler from "@/components/auth/ClientTokenHandler";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TokenHandler/>
+        <Suspense>
+          <ClientTokenHandler />
+        </Suspense>
         <ReactQueryProvider>
           <UserProvider>
             {children}
