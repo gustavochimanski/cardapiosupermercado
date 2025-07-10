@@ -2,8 +2,9 @@
 "use client";
 
 import axios from "axios";
+
 const apiAdmin = axios.create({
-  baseURL: "/api/proxy/mensura",   //
+  baseURL: "/api/proxy/mensura",
 });
 
 export default apiAdmin;

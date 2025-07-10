@@ -4,26 +4,46 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "edge";
 
 export async function GET(req: NextRequest) {
-  // extrai o token do cookie
+  // 1. Extrai o token do cookie
   const token = req.cookies.get("supervisor_token")?.value;
+  console.log("[proxy] Cookie supervisor_token:", token);
+
   if (!token) {
+    console.log("[proxy] Token ausente – retornando 401");
     return NextResponse.json({ message: "Não autorizado" }, { status: 401 });
   }
 
-  // monta a URL para o FastAPI
+  // 2. Monta a URL para o FastAPI
   const { pathname, search } = req.nextUrl;
-  // `/api/proxy/mensura/auth/me` → strip `/api/proxy` → `/mensura/auth/me`
   const forwardPath = pathname.replace(/^\/api\/proxy/, "");
   const apiUrl = `https://mensuraapi.com.br${forwardPath}${search}`;
+  console.log("[proxy] Encaminhando para FastAPI em:", apiUrl);
 
-  // repassa a requisição, incluindo o header
-  const upstream = await fetch(apiUrl, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  // 3. Repassa a requisição, incluindo o header
+  let upstream: Response;
+  try {
+    upstream = await fetch(apiUrl, {
+      method: req.method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (err) {
+    console.error("[proxy] Erro ao chamar FastAPI:", err);
+    return NextResponse.json({ message: "Erro de proxy" }, { status: 502 });
+  }
 
-  const body = await upstream.json().catch(() => ({}));
+  console.log("[proxy] FastAPI respondeu com status:", upstream.status);
+
+  // 4. Captura o corpo da resposta
+  let body: any = {};
+  try {
+    body = await upstream.json();
+  } catch (err) {
+    console.warn("[proxy] Não foi possível ler JSON do body, enviando vazio.");
+  }
+
+  // 5. Retorna para o cliente
   return NextResponse.json(body, { status: upstream.status });
 }
