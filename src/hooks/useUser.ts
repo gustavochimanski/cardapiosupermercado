@@ -5,7 +5,7 @@ export function useUser() {
   return useQuery({
     queryKey: ["currentUser"],
     queryFn: async () => {
-      const { data } = await api.get("/auth/token");
+      const { data } = await api.get("/mensura/auth/token");
       return data;
     },
   });

@@ -10,8 +10,8 @@ export function TokenHandler() {
 
   useEffect(() => {
     const token = searchParams.get("supervisor_token");
+    console.log("🔐 Token recebido via URL:", token);
     if (token) {
-      console.log("🔐 Token recebido via URL:", token);
       setCookie("token", token, { path: "/" });
     }
   }, [searchParams]);
