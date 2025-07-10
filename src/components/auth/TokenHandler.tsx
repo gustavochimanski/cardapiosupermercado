@@ -3,7 +3,7 @@
 
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Cookies from "js-cookie";
+import { setCookie } from "cookies-next";
 
 export function TokenHandler() {
   const searchParams = useSearchParams();
@@ -12,7 +12,7 @@ export function TokenHandler() {
     const token = searchParams.get("supervisor_token");
     if (token) {
       console.log("🔐 Token recebido via URL:", token);
-      Cookies.set("token", token, { path: "/" });
+      setCookie("token", token, { path: "/" });
     }
   }, [searchParams]);
 

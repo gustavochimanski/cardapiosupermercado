@@ -4,11 +4,11 @@
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-const apiMensura = axios.create({
+const apiAdmin = axios.create({
   baseURL: "https://mensuraapi.com.br",
 });
 
-apiMensura.interceptors.request.use((config) => {
+apiAdmin.interceptors.request.use((config) => {
   // pega o token do cookie (funciona no client)
   const token = getCookie("access_token");
   if (token && typeof token === "string") {
@@ -17,4 +17,4 @@ apiMensura.interceptors.request.use((config) => {
   return config;
 });
 
-export default apiMensura;
+export default apiAdmin;
