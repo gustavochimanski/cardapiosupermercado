@@ -4,6 +4,7 @@ import "./globals.css";
 import FooterComponent from "@/components/Shared/Footer";
 import { ReactQueryProvider } from "@/providers/ReactQueryClientProvider";
 import { UserProvider } from "@/context/UserContext";
+import { TokenHandler } from "@/components/auth/TokenHandler";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <TokenHandler/>
         <ReactQueryProvider>
           <UserProvider>
             {children}
