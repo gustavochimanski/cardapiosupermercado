@@ -5,11 +5,10 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 
 const apiAdmin = axios.create({
-  baseURL: "https://mensuraapi.com.br",
+  baseURL: "/mensura",   //
 });
 
 apiAdmin.interceptors.request.use((config) => {
-  // pega o token do cookie (funciona no client)
   const token = getCookie("supervisor_token");
   if (token && typeof token === "string") {
     config.headers.Authorization = `Bearer ${token}`;
