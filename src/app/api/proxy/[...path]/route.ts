@@ -36,8 +36,8 @@ export async function GET(req: NextRequest) {
 
   console.log("[proxy] FastAPI respondeu com status:", upstream.status);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // 4. Captura o corpo da resposta
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let body: any = {};
   try {
     body = await upstream.json();
