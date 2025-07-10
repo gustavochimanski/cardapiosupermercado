@@ -15,15 +15,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
-  async rewrites() {
-    return [
-      {
-        source: "/mensura/:path*",
-        destination: "https://mensuraapi.com.br/mensura/:path*",
-      },
-    ];
-  },
 };
 
 export default nextConfig;
